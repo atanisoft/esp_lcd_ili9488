@@ -29,3 +29,7 @@ For more information on the usage of the `idf_component.yml` file please refer t
 ## Supported platforms
 
 At this time testing is limited to ESP32 and ESP32-S3, other ESP32 variants should work but are not tested.
+
+## Required sdkconfig entries
+
+Since the ILI9488 display uses 18 bit color values it is required to set `CONFIG_LV_COLOR_DEPTH_32=y` in your sdkconfig.
