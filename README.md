@@ -1,31 +1,31 @@
-# ESP LCD ILI9488
+# esp_lcd driver for ILI9488 displays
 
-Implementation of the ILI9488 LCD controller with esp_lcd component. 
+This component provides an implementation of the ILI9488 LCD controller using the esp_lcd component APIs.
 
 | LCD controller | Communication interface | Component name | Link to datasheet |
 | :------------: | :---------------------: | :------------: | :---------------: |
-| ILI9488        | SPI                     | esp_lcd_ili9488     | [Specification](https://focuslcds.com/content/ILI9488.pdf) |
+| ILI9488        | SPI                     | esp_lcd_ili9488 | [Specification](https://focuslcds.com/content/ILI9488.pdf) |
 
-## Add to project
+## Using this component in your project
 
-This package is not part of the [Espressif's component service](https://components.espressif.com/)
-at this time. Adding this component to your project can be done by using adding the following
-to your `idf_component.yml` file:
-```
-esp_lcd_ili9488:
-    git: https://github.com/atanisoft/esp_lcd_ili9488.git
-```
+This package can be added to your project in two ways:
 
-Under the `dependencies` section such as:
+1. Using [Espressif's component service](https://components.espressif.com/) as:
 ```
 dependencies:
-  idf: ">=4.4"
+  atanisoft/esp_lcd_ili9488: "~1.0.0"
+```
+
+2. Using the git repository directly:
+
+```
+dependencies:
   esp_lcd_ili9488:
     git: https://github.com/atanisoft/esp_lcd_ili9488.git
 ```
 
 For more information on the usage of the `idf_component.yml` file please refer to [Espressif's documentation](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/tools/idf-component-manager.html).
 
-## Example usage
+## Supported platforms
 
-Coming soon.
+At this time testing is limited to ESP32 and ESP32-S3, other ESP32 variants should work but are not tested.
