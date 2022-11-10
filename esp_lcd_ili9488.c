@@ -346,14 +346,18 @@ esp_err_t esp_lcd_new_panel_ili9488(
     }
 
     ili9488->madctl_val = LCD_CMD_MX_BIT | LCD_CMD_BGR_BIT;
-    if (panel_dev_config->color_space == ESP_LCD_COLOR_SPACE_RGB)
+    switch (panel_dev_config->color_space)
     {
-        ESP_LOGI(TAG, "Configuring for RGB color order");
-        ili9488->madctl_val &= ~LCD_CMD_BGR_BIT;
-    }
-    else
-    {
-        ESP_LOGI(TAG, "Configuring for BGR color order");
+        case ESP_LCD_COLOR_SPACE_RGB:
+            ESP_LOGI(TAG, "Configuring for RGB color order");
+            ili9488->madctl_val &= ~LCD_CMD_BGR_BIT;
+            break;
+        case ESP_LCD_COLOR_SPACE_BGR:
+            ESP_LOGI(TAG, "Configuring for BGR color order");
+            break;
+        default:
+            ESP_GOTO_ON_FALSE(false, ESP_ERR_INVALID_ARG, err, TAG,
+                              "Unsupported color mode!");
     }
 
     if (panel_dev_config->bits_per_pixel == 16)
