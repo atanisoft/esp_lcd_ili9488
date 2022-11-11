@@ -52,6 +52,7 @@ static lv_disp_t *lv_display = NULL;
 static lv_color_t *lv_buf_1 = NULL;
 static lv_color_t *lv_buf_2 = NULL;
 static lv_obj_t *meter = NULL;
+static lv_style_t style_screen;
 
 static void update_meter_value(void *indic, int32_t v)
 {
@@ -242,41 +243,48 @@ void initialize_lvgl()
 void create_demo_ui()
 {
     lv_obj_t *scr = lv_disp_get_scr_act(NULL);
+
+    // Set the background color of the display to black.
+    lv_style_init(&style_screen);
+    lv_style_set_bg_color(&style_screen, lv_color_black());
+    lv_obj_add_style(lv_scr_act(), &style_screen, LV_STATE_DEFAULT);
+
+    // Create a meter which can be animated.
     meter = lv_meter_create(scr);
     lv_obj_center(meter);
     lv_obj_set_size(meter, 200, 200);
 
-    /* Add a scale first */
+    // Add a scale first
     lv_meter_scale_t *scale = lv_meter_add_scale(meter);
     lv_meter_set_scale_ticks(meter, scale, 41, 2, 10, lv_palette_main(LV_PALETTE_GREY));
     lv_meter_set_scale_major_ticks(meter, scale, 8, 4, 15, lv_color_black(), 10);
 
     lv_meter_indicator_t *indic;
 
-    /* Add a blue arc to the start */
+    // Add a blue arc to the start
     indic = lv_meter_add_arc(meter, scale, 3, lv_palette_main(LV_PALETTE_BLUE), 0);
     lv_meter_set_indicator_start_value(meter, indic, 0);
     lv_meter_set_indicator_end_value(meter, indic, 20);
 
-    /* Make the tick lines blue at the start of the scale */
+    // Make the tick lines blue at the start of the scale
     indic = lv_meter_add_scale_lines(meter, scale, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_BLUE), false, 0);
     lv_meter_set_indicator_start_value(meter, indic, 0);
     lv_meter_set_indicator_end_value(meter, indic, 20);
 
-    /* Add a red arc to the end */
+    // Add a red arc to the end
     indic = lv_meter_add_arc(meter, scale, 3, lv_palette_main(LV_PALETTE_RED), 0);
     lv_meter_set_indicator_start_value(meter, indic, 80);
     lv_meter_set_indicator_end_value(meter, indic, 100);
 
-    /* Make the tick lines red at the end of the scale */
+    // Make the tick lines red at the end of the scale
     indic = lv_meter_add_scale_lines(meter, scale, lv_palette_main(LV_PALETTE_RED), lv_palette_main(LV_PALETTE_RED), false, 0);
     lv_meter_set_indicator_start_value(meter, indic, 80);
     lv_meter_set_indicator_end_value(meter, indic, 100);
 
-    /* Add a needle line indicator */
+    // Add a needle line indicator
     indic = lv_meter_add_needle_line(meter, scale, 4, lv_palette_main(LV_PALETTE_GREY), -10);
 
-    /* Create an animation to set the value */
+    // Create an animation to set the value
     lv_anim_t a;
     lv_anim_init(&a);
     lv_anim_set_exec_cb(&a, update_meter_value);
