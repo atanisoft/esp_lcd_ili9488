@@ -8,6 +8,7 @@
 #include <driver/ledc.h>
 #include <driver/spi_master.h>
 #include <esp_err.h>
+#include <esp_log.h>
 #include <esp_lcd_panel_io.h>
 #include <esp_lcd_panel_vendor.h>
 #include <esp_lcd_panel_ops.h>
@@ -19,27 +20,43 @@
 #include <stdio.h>
 #include "sdkconfig.h"
 
+// Uncomment the following line to enable using double buffering of LVGL color
+// data.
+// #define USE_DOUBLE_BUFFERING 1
+
+static const char *TAG = "main";
+
 static const int DISPLAY_HORIZONTAL_PIXELS = 320;
 static const int DISPLAY_VERTICAL_PIXELS = 480;
 static const int DISPLAY_COMMAND_BITS = 8;
 static const int DISPLAY_PARAMETER_BITS = 8;
 static const unsigned int DISPLAY_REFRESH_HZ = 40000000;
 static const int DISPLAY_SPI_QUEUE_LEN = 10;
-static const int DISPLAY_BITS_PER_PIXEL = 18;
-
 static const int SPI_MAX_TRANSFER_SIZE = 32768;
+
+// Default to 50 lines of color data
+static const size_t LV_BUFFER_SIZE = DISPLAY_HORIZONTAL_PIXELS * 50;
+static const int LVGL_UPDATE_PERIOD_MS = 5;
+
+static const ledc_mode_t BACKLIGHT_LEDC_MODE = LEDC_LOW_SPEED_MODE;
+static const ledc_channel_t BACKLIGHT_LEDC_CHANNEL = LEDC_CHANNEL_0;
+static const ledc_timer_t BACKLIGHT_LEDC_TIMER = LEDC_TIMER_1;
+static const ledc_timer_bit_t BACKLIGHT_LEDC_TIMER_RESOLUTION = LEDC_TIMER_10_BIT;
+static const uint32_t BACKLIGHT_LEDC_FRQUENCY = 5000;
+
 static esp_lcd_panel_io_handle_t lcd_io_handle = NULL;
 static esp_lcd_panel_handle_t lcd_handle = NULL;
 static lv_disp_draw_buf_t lv_disp_buf;
 static lv_disp_drv_t lv_disp_drv;
 static lv_disp_t *lv_display = NULL;
-static lv_color_t *lv_buf_1 = NULL, *lv_buf_2 = NULL;
+static lv_color_t *lv_buf_1 = NULL;
+static lv_color_t *lv_buf_2 = NULL;
+static lv_obj_t *meter = NULL;
 
-static ledc_mode_t BACKLIGHT_LEDC_MODE = LEDC_LOW_SPEED_MODE;
-static ledc_channel_t BACKLIGHT_LEDC_CHANNEL = LEDC_CHANNEL_0;
-static ledc_timer_t BACKLIGHT_LEDC_TIMER = LEDC_TIMER_1;
-static ledc_timer_bit_t BACKLIGHT_LEDC_TIMER_RESOLUTION = LEDC_TIMER_10_BIT;
-static uint32_t BACKLIGHT_LEDC_FRQUENCY = 5000;
+static void update_meter_value(void *indic, int32_t v)
+{
+    lv_meter_set_indicator_end_value(meter, indic, v);
+}
 
 static bool notify_lvgl_flush_ready(esp_lcd_panel_io_handle_t panel_io,
     esp_lcd_panel_io_event_data_t *edata, void *user_ctx)
@@ -60,34 +77,9 @@ static void lvgl_flush_cb(lv_disp_drv_t *drv, const lv_area_t *area, lv_color_t 
     esp_lcd_panel_draw_bitmap(panel_handle, offsetx1, offsety1, offsetx2 + 1, offsety2 + 1, color_map);
 }
 
-static void IRAM_ATTR lv_tick_task(void)
+static void IRAM_ATTR lvgl_tick_cb(void *param)
 {
-	lv_tick_inc(portTICK_RATE_MS);
-}
-
-static void lvgl_port_update_callback(lv_disp_drv_t *drv)
-{
-    esp_lcd_panel_handle_t panel_handle = (esp_lcd_panel_handle_t) drv->user_data;
-
-    switch (drv->rotated)
-    {
-        case LV_DISP_ROT_NONE:
-            esp_lcd_panel_swap_xy(panel_handle, false);
-            esp_lcd_panel_mirror(panel_handle, true, true);
-            break;
-        case LV_DISP_ROT_90:
-            esp_lcd_panel_swap_xy(panel_handle, true);
-            esp_lcd_panel_mirror(panel_handle, true, false);
-            break;
-        case LV_DISP_ROT_180:
-            esp_lcd_panel_swap_xy(panel_handle, false);
-            esp_lcd_panel_mirror(panel_handle, false, false);
-            break;
-        case LV_DISP_ROT_270:
-            esp_lcd_panel_swap_xy(panel_handle, true);
-            esp_lcd_panel_mirror(panel_handle, false, true);
-            break;
-    }
+	lv_tick_inc(LVGL_UPDATE_PERIOD_MS);
 }
 
 static void display_brightness_init(void)
@@ -114,6 +106,7 @@ static void display_brightness_init(void)
         .freq_hz = BACKLIGHT_LEDC_FRQUENCY,
         .clk_cfg = LEDC_AUTO_CLK
     };
+    ESP_LOGI(TAG, "Initializing LEDC for backlight pin: %d", CONFIG_TFT_BACKLIGHT_PIN);
 
     ESP_ERROR_CHECK(ledc_timer_config(&LCD_backlight_timer));
     ESP_ERROR_CHECK(ledc_channel_config(&LCD_backlight_channel));
@@ -129,6 +122,7 @@ void display_brightness_set(int brightness_percentage)
     {
         brightness_percentage = 0;
     }
+    ESP_LOGI(TAG, "Setting backlight to %d%%", brightness_percentage);
 
     // LEDC resolution set to 10bits, thus: 100% = 1023
     uint32_t duty_cycle = (1023 * brightness_percentage) / 100;
@@ -138,6 +132,8 @@ void display_brightness_set(int brightness_percentage)
 
 void initialize_spi()
 {
+    ESP_LOGI(TAG, "Initializing SPI bus (MOSI:%d, MISO:%d, CLK:%d)",
+             CONFIG_SPI_MOSI, CONFIG_SPI_MISO, CONFIG_SPI_CLOCK);
     spi_bus_config_t bus =
     {
         .mosi_io_num = CONFIG_SPI_MOSI,
@@ -183,8 +179,8 @@ void initialize_display()
     const esp_lcd_panel_dev_config_t lcd_config = 
     {
         .reset_gpio_num = CONFIG_TFT_RESET_PIN,
-        .color_space = ESP_LCD_COLOR_SPACE_BGR,
-        .bits_per_pixel = DISPLAY_BITS_PER_PIXEL,
+        .color_space = CONFIG_DISPLAY_COLOR_MODE,
+        .bits_per_pixel = 16,
         .flags =
         {
             .reset_active_high = 0
@@ -199,8 +195,10 @@ void initialize_display()
 
     ESP_ERROR_CHECK(esp_lcd_panel_reset(lcd_handle));
     ESP_ERROR_CHECK(esp_lcd_panel_init(lcd_handle));
+    ESP_ERROR_CHECK(esp_lcd_panel_invert_color(lcd_handle, false));
+    ESP_ERROR_CHECK(esp_lcd_panel_swap_xy(lcd_handle, false));
+    ESP_ERROR_CHECK(esp_lcd_panel_mirror(lcd_handle, true, false));
     ESP_ERROR_CHECK(esp_lcd_panel_set_gap(lcd_handle, 0, 0));
-    ESP_ERROR_CHECK(esp_lcd_panel_mirror(lcd_handle, true, true));
 #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
     ESP_ERROR_CHECK(esp_lcd_panel_disp_off(lcd_handle, false));
 #else
@@ -210,25 +208,86 @@ void initialize_display()
 
 void initialize_lvgl()
 {
+    ESP_LOGI(TAG, "Initializing LVGL");
     lv_init();
-    lv_buf_1 = (lv_color_t *)heap_caps_malloc(DISPLAY_HORIZONTAL_PIXELS * 50 * sizeof(lv_color_t), MALLOC_CAP_DMA);
-    lv_buf_2 = (lv_color_t *)heap_caps_malloc(DISPLAY_HORIZONTAL_PIXELS * 50 * sizeof(lv_color_t), MALLOC_CAP_DMA);
-    lv_disp_draw_buf_init(&lv_disp_buf, lv_buf_1, lv_buf_2, DISPLAY_HORIZONTAL_PIXELS * 20);
+    ESP_LOGI(TAG, "Allocating %zu bytes for LVGL buffer", LV_BUFFER_SIZE * sizeof(lv_color_t));
+    lv_buf_1 = (lv_color_t *)heap_caps_malloc(LV_BUFFER_SIZE * sizeof(lv_color_t), MALLOC_CAP_DMA);
+#if USE_DOUBLE_BUFFERING
+    ESP_LOGI(TAG, "Allocating %zu bytes for second LVGL buffer", LV_BUFFER_SIZE * sizeof(lv_color_t));
+    lv_buf_2 = (lv_color_t *)heap_caps_malloc(LV_BUFFER_SIZE * sizeof(lv_color_t), MALLOC_CAP_DMA);
+#endif
+    ESP_LOGI(TAG, "Creating LVLG display buffer");
+    lv_disp_draw_buf_init(&lv_disp_buf, lv_buf_1, lv_buf_2, LV_BUFFER_SIZE);
 
+    ESP_LOGI(TAG, "Initializing %dx%d display", DISPLAY_HORIZONTAL_PIXELS, DISPLAY_VERTICAL_PIXELS);
     lv_disp_drv_init(&lv_disp_drv);
     lv_disp_drv.hor_res = DISPLAY_HORIZONTAL_PIXELS;
     lv_disp_drv.ver_res = DISPLAY_VERTICAL_PIXELS;
     lv_disp_drv.flush_cb = lvgl_flush_cb;
-    lv_disp_drv.drv_update_cb = lvgl_port_update_callback;
     lv_disp_drv.draw_buf = &lv_disp_buf;
     lv_disp_drv.user_data = lcd_handle;
     lv_display = lv_disp_drv_register(&lv_disp_drv);
 
-    esp_register_freertos_tick_hook(lv_tick_task);
+    ESP_LOGI(TAG, "Creating LVGL tick timer");
+    const esp_timer_create_args_t lvgl_tick_timer_args =
+    {
+        .callback = &lvgl_tick_cb,
+        .name = "lvgl_tick"
+    };
+    esp_timer_handle_t lvgl_tick_timer = NULL;
+    ESP_ERROR_CHECK(esp_timer_create(&lvgl_tick_timer_args, &lvgl_tick_timer));
+    ESP_ERROR_CHECK(esp_timer_start_periodic(lvgl_tick_timer, LVGL_UPDATE_PERIOD_MS * 1000));
+}
 
-    lv_obj_t *spinner = lv_spinner_create(lv_scr_act(), 1000, 60);
-    lv_obj_set_size(spinner, 100, 100);
-    lv_obj_center(spinner);
+void create_demo_ui()
+{
+    lv_obj_t *scr = lv_disp_get_scr_act(NULL);
+    meter = lv_meter_create(scr);
+    lv_obj_center(meter);
+    lv_obj_set_size(meter, 200, 200);
+
+    /* Add a scale first */
+    lv_meter_scale_t *scale = lv_meter_add_scale(meter);
+    lv_meter_set_scale_ticks(meter, scale, 41, 2, 10, lv_palette_main(LV_PALETTE_GREY));
+    lv_meter_set_scale_major_ticks(meter, scale, 8, 4, 15, lv_color_black(), 10);
+
+    lv_meter_indicator_t *indic;
+
+    /* Add a blue arc to the start */
+    indic = lv_meter_add_arc(meter, scale, 3, lv_palette_main(LV_PALETTE_BLUE), 0);
+    lv_meter_set_indicator_start_value(meter, indic, 0);
+    lv_meter_set_indicator_end_value(meter, indic, 20);
+
+    /* Make the tick lines blue at the start of the scale */
+    indic = lv_meter_add_scale_lines(meter, scale, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_BLUE), false, 0);
+    lv_meter_set_indicator_start_value(meter, indic, 0);
+    lv_meter_set_indicator_end_value(meter, indic, 20);
+
+    /* Add a red arc to the end */
+    indic = lv_meter_add_arc(meter, scale, 3, lv_palette_main(LV_PALETTE_RED), 0);
+    lv_meter_set_indicator_start_value(meter, indic, 80);
+    lv_meter_set_indicator_end_value(meter, indic, 100);
+
+    /* Make the tick lines red at the end of the scale */
+    indic = lv_meter_add_scale_lines(meter, scale, lv_palette_main(LV_PALETTE_RED), lv_palette_main(LV_PALETTE_RED), false, 0);
+    lv_meter_set_indicator_start_value(meter, indic, 80);
+    lv_meter_set_indicator_end_value(meter, indic, 100);
+
+    /* Add a needle line indicator */
+    indic = lv_meter_add_needle_line(meter, scale, 4, lv_palette_main(LV_PALETTE_GREY), -10);
+
+    /* Create an animation to set the value */
+    lv_anim_t a;
+    lv_anim_init(&a);
+    lv_anim_set_exec_cb(&a, update_meter_value);
+    lv_anim_set_var(&a, indic);
+    lv_anim_set_values(&a, 0, 100);
+    lv_anim_set_time(&a, 2000);
+    lv_anim_set_repeat_delay(&a, 100);
+    lv_anim_set_playback_time(&a, 500);
+    lv_anim_set_playback_delay(&a, 100);
+    lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
+    lv_anim_start(&a);
 }
 
 void app_main()
@@ -238,11 +297,12 @@ void app_main()
     initialize_spi();
     initialize_display();
     initialize_lvgl();
-    display_brightness_set(100);
+    create_demo_ui();
+    display_brightness_set(75);
 
     while (1)
     {
-        lv_timer_handler();
         vTaskDelay(pdMS_TO_TICKS(10));
+        lv_timer_handler();
     }
 }

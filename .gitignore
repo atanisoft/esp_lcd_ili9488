@@ -1,0 +1,4 @@
+examples/**/build
+examples/**/sdkconfig
+examples/**/dependencies.lock
+examples/**/managed_components

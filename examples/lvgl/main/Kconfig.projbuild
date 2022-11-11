@@ -26,6 +26,13 @@ menu "Pin Configuration"
             range -1 48 if IDF_TARGET_ESP32S3
             default 3 if IDF_TARGET_ESP32S3
             default 16
+
+        config TFT_RESET_PIN
+            int
+            range -1 33 if IDF_TARGET_ESP32
+            range -1 48 if IDF_TARGET_ESP32S3
+            default 46 if IDF_TARGET_ESP32S3
+            default -1
     
         config TFT_DC_PIN
             int
@@ -42,3 +49,17 @@ menu "Pin Configuration"
             default 18
     endmenu
 endmenu
+
+choice DISPLAY_COLOR_MODE
+    bool "Color Mode"
+    default DISPLAY_COLOR_MODE_BGR
+    config DISPLAY_COLOR_MODE_BGR
+        bool "Blue,Green,Red"
+    config DISPLAY_COLOR_MODE_RGB
+        bool "Red,Green,Blue"
+endchoice
+
+config DISPLAY_COLOR_MODE
+    int
+    default 1 if DISPLAY_COLOR_MODE_BGR
+    default 0 if DISPLAY_COLOR_MODE_RGB

@@ -32,4 +32,6 @@ At this time testing is limited to ESP32 and ESP32-S3, other ESP32 variants shou
 
 ## Required sdkconfig entries
 
-Since the ILI9488 display uses 18 bit color values it is required to set `CONFIG_LV_COLOR_DEPTH_32=y` in your sdkconfig.
+This driver converts the color data from 16-bit to 18-bit as part of the `draw_bitmap` callback.
+Therefore it is required to set `CONFIG_LV_COLOR_DEPTH_16=y` in your sdkconfig. In the future other
+color depths may be supported.
