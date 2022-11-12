@@ -1,5 +1,9 @@
 # Change log for esp_lcd_ili9488
 
+## v1.0.4 - License tagging fixes
+
+This release only updates the SPDX license tagging of source files.
+
 ## v1.0.3 - Bug Fixes and LVGL example update
 
 This release removes (and desupports) a dependency on 32-bit color depth when
