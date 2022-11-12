@@ -1,7 +1,7 @@
 /*
  * SPDX-FileCopyrightText: 2022 atanisoft (github.com/atanisoft)
  *
- * SPDX-License-Identifier: Apache-2.0
+ * SPDX-License-Identifier: MIT
  */
 
 #include <driver/gpio.h>
