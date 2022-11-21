@@ -36,7 +36,8 @@ typedef struct
     bool reset_level;
     int x_gap;
     int y_gap;
-    uint8_t madctl_val;
+    uint8_t memory_access_control;
+    uint8_t color_mode;
 } ili9488_panel_t;
 
 enum ili9488_constants
@@ -130,8 +131,8 @@ static esp_err_t panel_ili9488_init(esp_lcd_panel_t *panel)
         { ILI9488_POWER_CTL_ONE, { 0x17, 0x15 }, 2 },
         { ILI9488_POWER_CTL_TWO, { 0x41 }, 1 },
         { ILI9488_POWER_CTL_THREE, { 0x00, 0x12, 0x80 }, 3 },
-        { LCD_CMD_MADCTL, { ili9488->madctl_val }, 1 },
-        { LCD_CMD_COLMOD, { ILI9488_COLOR_MODE_18BIT }, 1 },
+        { LCD_CMD_MADCTL, { ili9488->memory_access_control }, 1 },
+        { LCD_CMD_COLMOD, { ili9488->color_mode }, 1 },
         { ILI9488_INTRFC_MODE_CTL, { ILI9488_INTERFACE_MODE_USE_SDO }, 1 },
         { ILI9488_FRAME_RATE_NORMAL_CTL, { ILI9488_FRAME_RATE_60HZ }, 1 },
         { ILI9488_INVERSION_CTL, { 0x02 }, 1 },
@@ -193,27 +194,40 @@ static esp_err_t panel_ili9488_draw_bitmap(
     SEND_COORDS(x_start, x_end, io, LCD_CMD_CASET);
     SEND_COORDS(y_start, y_end, io, LCD_CMD_RASET);
 
-    uint8_t *buf = NULL;
-    while (buf == NULL)
+    // When the ILI9488 is used in 18-bit color mode we need to convert the
+    // incoming color data from RGB565 (16-bit) to RGB666. This unfortunately
+    // requires a buffer to be allocated.
+    //
+    // NOTE: 16-bit color does not work via SPI interface :(
+    if (ili9488->color_mode == ILI9488_COLOR_MODE_18BIT)
     {
-        buf = (uint8_t *) heap_caps_malloc(color_data_len * 3, MALLOC_CAP_DMA);
-        if (buf == NULL)
+        uint8_t *buf = NULL;
+        while (buf == NULL)
         {
-            ESP_LOGW(TAG, "Could not allocate enough DMA memory!");
+            buf = (uint8_t *) heap_caps_malloc(color_data_len * 3, MALLOC_CAP_DMA);
+            if (buf == NULL)
+            {
+                ESP_LOGW(TAG, "Could not allocate enough DMA memory!");
+            }
         }
-    }
 
-    uint16_t *raw_color_data = (uint16_t *) color_data;
-    for (uint32_t i = 0, pixel_index = 0; i < color_data_len; i++) {
-        buf[pixel_index++] = (uint8_t) (((raw_color_data[i] & 0xF800) >> 8) |
-                                        ((raw_color_data[i] & 0x8000) >> 13));
-        buf[pixel_index++] = (uint8_t) ((raw_color_data[i] & 0x07E0) >> 3);
-        buf[pixel_index++] = (uint8_t) (((raw_color_data[i] & 0x001F) << 3) |
-                                        ((raw_color_data[i] & 0x0010) >> 2));
-    }
+        uint16_t *raw_color_data = (uint16_t *) color_data;
+        for (uint32_t i = 0, pixel_index = 0; i < color_data_len; i++) {
+            buf[pixel_index++] = (uint8_t) (((raw_color_data[i] & 0xF800) >> 8) |
+                                            ((raw_color_data[i] & 0x8000) >> 13));
+            buf[pixel_index++] = (uint8_t) ((raw_color_data[i] & 0x07E0) >> 3);
+            buf[pixel_index++] = (uint8_t) (((raw_color_data[i] & 0x001F) << 3) |
+                                            ((raw_color_data[i] & 0x0010) >> 2));
+        }
 
-    esp_lcd_panel_io_tx_color(io, LCD_CMD_RAMWR, buf, color_data_len * 3);
-    heap_caps_free(buf);
+        esp_lcd_panel_io_tx_color(io, LCD_CMD_RAMWR, buf, color_data_len * 3);
+        heap_caps_free(buf);
+    }
+    else
+    {
+        // 16-bit color we can transmit as-is to the display.
+        esp_lcd_panel_io_tx_color(io, LCD_CMD_RAMWR, color_data, color_data_len * 2);
+    }
 
     return ESP_OK;
 }
@@ -245,21 +259,21 @@ static esp_err_t panel_ili9488_mirror(
     esp_lcd_panel_io_handle_t io = ili9488->io;
     if (mirror_x)
     {
-        ili9488->madctl_val |= LCD_CMD_MX_BIT;
+        ili9488->memory_access_control |= LCD_CMD_MX_BIT;
     }
     else
     {
-        ili9488->madctl_val &= ~LCD_CMD_MX_BIT;
+        ili9488->memory_access_control &= ~LCD_CMD_MX_BIT;
     }
     if (mirror_y)
     {
-        ili9488->madctl_val |= LCD_CMD_MY_BIT;
+        ili9488->memory_access_control |= LCD_CMD_MY_BIT;
     }
     else
     {
-        ili9488->madctl_val &= ~LCD_CMD_MY_BIT;
+        ili9488->memory_access_control &= ~LCD_CMD_MY_BIT;
     }
-    esp_lcd_panel_io_tx_param(io, LCD_CMD_MADCTL, &ili9488->madctl_val, 1);
+    esp_lcd_panel_io_tx_param(io, LCD_CMD_MADCTL, &ili9488->memory_access_control, 1);
     return ESP_OK;
 }
 
@@ -269,13 +283,13 @@ static esp_err_t panel_ili9488_swap_xy(esp_lcd_panel_t *panel, bool swap_axes)
     esp_lcd_panel_io_handle_t io = ili9488->io;
     if (swap_axes)
     {
-        ili9488->madctl_val |= LCD_CMD_MV_BIT;
+        ili9488->memory_access_control |= LCD_CMD_MV_BIT;
     }
     else
     {
-        ili9488->madctl_val &= ~LCD_CMD_MV_BIT;
+        ili9488->memory_access_control &= ~LCD_CMD_MV_BIT;
     }
-    esp_lcd_panel_io_tx_param(io, LCD_CMD_MADCTL, &ili9488->madctl_val, 1);
+    esp_lcd_panel_io_tx_param(io, LCD_CMD_MADCTL, &ili9488->memory_access_control, 1);
     return ESP_OK;
 }
 
@@ -337,12 +351,18 @@ esp_err_t esp_lcd_new_panel_ili9488(
                           "configure GPIO for RESET line failed");
     }
 
-    ili9488->madctl_val = LCD_CMD_MX_BIT | LCD_CMD_BGR_BIT;
+    ili9488->color_mode = ILI9488_COLOR_MODE_18BIT;
+    if (panel_dev_config->bits_per_pixel == 16)
+    {
+        ili9488->color_mode = ILI9488_COLOR_MODE_16BIT;
+    }
+
+    ili9488->memory_access_control = LCD_CMD_MX_BIT | LCD_CMD_BGR_BIT;
     switch (panel_dev_config->color_space)
     {
         case ESP_LCD_COLOR_SPACE_RGB:
             ESP_LOGI(TAG, "Configuring for RGB color order");
-            ili9488->madctl_val &= ~LCD_CMD_BGR_BIT;
+            ili9488->memory_access_control &= ~LCD_CMD_BGR_BIT;
             break;
         case ESP_LCD_COLOR_SPACE_BGR:
             ESP_LOGI(TAG, "Configuring for BGR color order");

@@ -22,8 +22,16 @@ extern "C" {
  *          - ESP_ERR_INVALID_ARG   if parameter is invalid
  *          - ESP_ERR_NO_MEM        if out of memory
  *          - ESP_OK                on success
+ * 
+ * NOTE: If you are using the SPI interface you *MUST* 18-bit color mode
+ * in @param panel_dev_config field bits_per_pixel.
+ * 
+ * NOTE: For parallel IO (Intel 8080) interface 16-bit color mode should
+ * be used.
  */
-esp_err_t esp_lcd_new_panel_ili9488(const esp_lcd_panel_io_handle_t io, const esp_lcd_panel_dev_config_t *panel_dev_config, esp_lcd_panel_handle_t *ret_panel);
+esp_err_t esp_lcd_new_panel_ili9488(const esp_lcd_panel_io_handle_t io,
+                                    const esp_lcd_panel_dev_config_t *panel_dev_config,
+                                    esp_lcd_panel_handle_t *ret_panel);
 
 #ifdef __cplusplus
 }

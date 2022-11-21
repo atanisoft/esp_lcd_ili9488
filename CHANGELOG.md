@@ -1,5 +1,11 @@
 # Change log for esp_lcd_ili9488
 
+## v1.0.5 - Add 16-bit support for parallel IO interface support
+
+Parallel IO mode (Intel 8080 interface) should use 16-bit color mode instead
+of being forced into 18-bit color mode that is required for use when the SPI
+interface is used.
+
 ## v1.0.4 - License tagging fixes
 
 This release only updates the SPDX license tagging of source files.
