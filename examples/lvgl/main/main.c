@@ -181,7 +181,7 @@ void initialize_display()
     {
         .reset_gpio_num = CONFIG_TFT_RESET_PIN,
         .color_space = CONFIG_DISPLAY_COLOR_MODE,
-        .bits_per_pixel = 16,
+        .bits_per_pixel = 18,
         .flags =
         {
             .reset_active_high = 0

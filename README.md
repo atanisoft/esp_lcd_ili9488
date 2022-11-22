@@ -4,7 +4,22 @@ This component provides an implementation of the ILI9488 LCD controller using th
 
 | LCD controller | Communication interface | Component name | Link to datasheet |
 | :------------: | :---------------------: | :------------: | :---------------: |
-| ILI9488        | SPI                     | esp_lcd_ili9488 | [Specification](https://focuslcds.com/content/ILI9488.pdf) |
+| ILI9488        | SPI or Intel 8080       | esp_lcd_ili9488 | [Specification](https://focuslcds.com/content/ILI9488.pdf) |
+
+## Note on supported communication interfaces
+
+When using the SPI interface it is required to use 18-bit color depth mode as below:
+
+```
+    const esp_lcd_panel_dev_config_t lcd_config = 
+    {
+    ...
+        .bits_per_pixel = 18,
+    ...
+    };
+```
+
+When using the Intel 8080 (Parallel) interface the 16-bit color depth mode should be used.
 
 ## Using this component in your project
 
