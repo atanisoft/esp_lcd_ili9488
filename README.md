@@ -21,6 +21,20 @@ When using the SPI interface it is required to use 18-bit color depth mode as be
 
 When using the Intel 8080 (Parallel) interface the 16-bit color depth mode should be used.
 
+## Display Reset pin
+
+If the display requires the usage of a RESET pin during the initialization process
+be sure to configure it as below:
+
+```
+    const esp_lcd_panel_dev_config_t lcd_config = 
+    {
+        .reset_gpio_num = CONFIG_TFT_RESET_PIN,
+        ....
+```
+
+If the display does not require this pin set this value to GPIO_NUM_NC (-1).
+
 ## Using this component in your project
 
 This package can be added to your project in two ways:

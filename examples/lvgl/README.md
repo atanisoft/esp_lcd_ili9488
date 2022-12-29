@@ -11,6 +11,7 @@ For the ESP32 pins are as follows:
 | SPI MOSI | 15 |
 | SPI CLK | 14 |
 | TFT CS | 16 |
+| TFT Reset | (not configured) |
 | TFT DC | 17 |
 | TFT Backlight | 18 |
 
@@ -20,11 +21,11 @@ For the ESP32-S3 pins are as follows:
 | pin | usage |
 | --- | ----- |
 | SPI MISO | 13 |
-| SPI MOSI | 15 |
-| SPI CLK | 14 |
+| SPI MOSI | 10 |
+| SPI CLK | 11 |
 | TFT CS | 3 |
+| TFT Reset | 46 |
 | TFT DC | 9 |
 | TFT Backlight | 12 |
 
 On the ESP32-S3 all pins can be reconfigured by using `idf.py menuconfig`.
-

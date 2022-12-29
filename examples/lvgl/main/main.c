@@ -161,7 +161,7 @@ void initialize_display()
     {
         .cs_gpio_num = CONFIG_TFT_CS_PIN,
         .dc_gpio_num = CONFIG_TFT_DC_PIN,
-        .spi_mode = CONFIG_TFT_DC_PIN,
+        .spi_mode = 0,
         .pclk_hz = DISPLAY_REFRESH_HZ,
         .trans_queue_depth = DISPLAY_SPI_QUEUE_LEN,
         .on_color_trans_done = notify_lvgl_flush_ready,
