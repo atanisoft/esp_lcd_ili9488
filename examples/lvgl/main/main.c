@@ -8,14 +8,15 @@
 #include <driver/ledc.h>
 #include <driver/spi_master.h>
 #include <esp_err.h>
+#include <esp_freertos_hooks.h>
 #include <esp_log.h>
 #include <esp_lcd_panel_io.h>
 #include <esp_lcd_panel_vendor.h>
 #include <esp_lcd_panel_ops.h>
 #include <esp_lcd_ili9488.h>
+#include <esp_timer.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
-#include <esp_freertos_hooks.h>
 #include <lvgl.h>
 #include <stdio.h>
 #include "sdkconfig.h"
@@ -192,7 +193,7 @@ void initialize_display()
     ESP_ERROR_CHECK(
         esp_lcd_new_panel_io_spi((esp_lcd_spi_bus_handle_t)SPI2_HOST, &io_config, &lcd_io_handle)); 
 
-    ESP_ERROR_CHECK(esp_lcd_new_panel_ili9488(lcd_io_handle, &lcd_config, &lcd_handle));
+    ESP_ERROR_CHECK(esp_lcd_new_panel_ili9488(lcd_io_handle, &lcd_config, LV_BUFFER_SIZE, &lcd_handle));
 
     ESP_ERROR_CHECK(esp_lcd_panel_reset(lcd_handle));
     ESP_ERROR_CHECK(esp_lcd_panel_init(lcd_handle));

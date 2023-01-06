@@ -38,6 +38,8 @@ typedef struct
     int y_gap;
     uint8_t memory_access_control;
     uint8_t color_mode;
+    size_t buffer_size;
+    uint8_t *color_buffer;
 } ili9488_panel_t;
 
 enum ili9488_constants
@@ -195,22 +197,12 @@ static esp_err_t panel_ili9488_draw_bitmap(
     SEND_COORDS(y_start, y_end, io, LCD_CMD_RASET);
 
     // When the ILI9488 is used in 18-bit color mode we need to convert the
-    // incoming color data from RGB565 (16-bit) to RGB666. This unfortunately
-    // requires a buffer to be allocated.
+    // incoming color data from RGB565 (16-bit) to RGB666.
     //
     // NOTE: 16-bit color does not work via SPI interface :(
     if (ili9488->color_mode == ILI9488_COLOR_MODE_18BIT)
     {
-        uint8_t *buf = NULL;
-        while (buf == NULL)
-        {
-            buf = (uint8_t *) heap_caps_malloc(color_data_len * 3, MALLOC_CAP_DMA);
-            if (buf == NULL)
-            {
-                ESP_LOGW(TAG, "Could not allocate enough DMA memory!");
-            }
-        }
-
+        uint8_t *buf = ili9488->color_buffer;
         uint16_t *raw_color_data = (uint16_t *) color_data;
         for (uint32_t i = 0, pixel_index = 0; i < color_data_len; i++) {
             buf[pixel_index++] = (uint8_t) (((raw_color_data[i] & 0xF800) >> 8) |
@@ -221,7 +213,6 @@ static esp_err_t panel_ili9488_draw_bitmap(
         }
 
         esp_lcd_panel_io_tx_color(io, LCD_CMD_RAMWR, buf, color_data_len * 3);
-        heap_caps_free(buf);
     }
     else
     {
@@ -331,6 +322,7 @@ static esp_err_t panel_ili9488_disp_on_off(esp_lcd_panel_t *panel, bool on_off)
 esp_err_t esp_lcd_new_panel_ili9488(
     const esp_lcd_panel_io_handle_t io,
     const esp_lcd_panel_dev_config_t *panel_dev_config,
+    const size_t buffer_size,
     esp_lcd_panel_handle_t *ret_panel)
 {
     esp_err_t ret = ESP_OK;
@@ -351,10 +343,21 @@ esp_err_t esp_lcd_new_panel_ili9488(
                           "configure GPIO for RESET line failed");
     }
 
-    ili9488->color_mode = ILI9488_COLOR_MODE_18BIT;
     if (panel_dev_config->bits_per_pixel == 16)
     {
         ili9488->color_mode = ILI9488_COLOR_MODE_16BIT;
+    }
+    else
+    {
+        ESP_GOTO_ON_FALSE(buffer_size > 0, ESP_ERR_INVALID_ARG, err, TAG,
+                          "Color conversion buffer size must be specified");
+        ili9488->color_mode = ILI9488_COLOR_MODE_18BIT;
+
+        // Allocate DMA buffer for color conversions
+        ili9488->color_buffer =
+            (uint8_t *)heap_caps_malloc(buffer_size * 3, MALLOC_CAP_DMA);
+        ESP_GOTO_ON_FALSE(ili9488->color_buffer, ESP_ERR_NO_MEM, err, TAG,
+                          "Failed to allocate DMA color conversion buffer");
     }
 
     ili9488->memory_access_control = LCD_CMD_MX_BIT | LCD_CMD_BGR_BIT;
@@ -371,7 +374,6 @@ esp_err_t esp_lcd_new_panel_ili9488(
             ESP_GOTO_ON_FALSE(false, ESP_ERR_INVALID_ARG, err, TAG,
                               "Unsupported color mode!");
     }
-
 
     ili9488->io = io;
     ili9488->reset_gpio_num = panel_dev_config->reset_gpio_num;
@@ -400,6 +402,10 @@ err:
         if (panel_dev_config->reset_gpio_num >= 0)
         {
             gpio_reset_pin(panel_dev_config->reset_gpio_num);
+        }
+        if (ili9488->color_buffer != NULL)
+        {
+            heap_caps_free(ili9488->color_buffer);
         }
         free(ili9488);
     }
