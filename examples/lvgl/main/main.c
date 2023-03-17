@@ -36,7 +36,7 @@ static const int DISPLAY_SPI_QUEUE_LEN = 10;
 static const int SPI_MAX_TRANSFER_SIZE = 32768;
 
 // Default to 50 lines of color data
-static const size_t LV_BUFFER_SIZE = DISPLAY_HORIZONTAL_PIXELS * 50;
+static const size_t LV_BUFFER_SIZE = DISPLAY_HORIZONTAL_PIXELS * 25;
 static const int LVGL_UPDATE_PERIOD_MS = 5;
 
 static const ledc_mode_t BACKLIGHT_LEDC_MODE = LEDC_LOW_SPEED_MODE;
