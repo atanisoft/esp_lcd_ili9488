@@ -40,6 +40,7 @@ typedef struct
     uint8_t color_mode;
     size_t buffer_size;
     uint8_t *color_buffer;
+    bool landscape;
 } ili9488_panel_t;
 
 enum ili9488_constants
@@ -66,6 +67,10 @@ enum ili9488_constants
 
     ILI9488_WRITE_MODE_BCTRL_DD_ON = 0x28,
     ILI9488_FRAME_RATE_60HZ = 0xA0,
+
+    ILI9488_SET_ADDRESS_MODE = 0x36,
+    ILI9488_ORIENTATION_LANDSCAPE = 0xf8,
+    ILI9488_ORIENTATION_PORTRAIT = 0x5c,
 
     ILI9488_INIT_LENGTH_MASK = 0x1F,
     ILI9488_INIT_DONE_FLAG = 0xFF
@@ -155,6 +160,9 @@ static esp_err_t panel_ili9488_init(esp_lcd_panel_t *panel)
             ili9488_init[cmd].data_bytes & ILI9488_INIT_LENGTH_MASK);
         cmd++;
     }
+    // Set address mode orientation
+    uint8_t cmdOrientation = ili9488->landscape ? ILI9488_ORIENTATION_LANDSCAPE : ILI9488_ORIENTATION_PORTRAIT;
+    esp_lcd_panel_io_tx_param(io, ILI9488_SET_ADDRESS_MODE, &cmdOrientation, 1);
 
     // Take the display out of sleep mode.
     esp_lcd_panel_io_tx_param(io, LCD_CMD_SLPOUT, NULL, 0);
@@ -323,6 +331,7 @@ esp_err_t esp_lcd_new_panel_ili9488(
     const esp_lcd_panel_io_handle_t io,
     const esp_lcd_panel_dev_config_t *panel_dev_config,
     const size_t buffer_size,
+    bool landscape,
     esp_lcd_panel_handle_t *ret_panel)
 {
     esp_err_t ret = ESP_OK;
@@ -342,6 +351,8 @@ esp_err_t esp_lcd_new_panel_ili9488(
         ESP_GOTO_ON_ERROR(gpio_config(&cfg), err, TAG,
                           "configure GPIO for RESET line failed");
     }
+    ili9488->landscape = landscape;
+
 
     if (panel_dev_config->bits_per_pixel == 16)
     {

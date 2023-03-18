@@ -35,8 +35,8 @@ static const unsigned int DISPLAY_REFRESH_HZ = 40000000;
 static const int DISPLAY_SPI_QUEUE_LEN = 10;
 static const int SPI_MAX_TRANSFER_SIZE = 32768;
 
-// Default to 50 lines of color data
-static const size_t LV_BUFFER_SIZE = DISPLAY_HORIZONTAL_PIXELS * 50;
+// Default to 25 lines of color data
+static const size_t LV_BUFFER_SIZE = DISPLAY_HORIZONTAL_PIXELS * 25;
 static const int LVGL_UPDATE_PERIOD_MS = 5;
 
 static const ledc_mode_t BACKLIGHT_LEDC_MODE = LEDC_LOW_SPEED_MODE;
@@ -193,7 +193,7 @@ void initialize_display()
     ESP_ERROR_CHECK(
         esp_lcd_new_panel_io_spi((esp_lcd_spi_bus_handle_t)SPI2_HOST, &io_config, &lcd_io_handle)); 
 
-    ESP_ERROR_CHECK(esp_lcd_new_panel_ili9488(lcd_io_handle, &lcd_config, LV_BUFFER_SIZE, &lcd_handle));
+    ESP_ERROR_CHECK(esp_lcd_new_panel_ili9488(lcd_io_handle, &lcd_config, LV_BUFFER_SIZE, false, &lcd_handle));
 
     ESP_ERROR_CHECK(esp_lcd_panel_reset(lcd_handle));
     ESP_ERROR_CHECK(esp_lcd_panel_init(lcd_handle));
