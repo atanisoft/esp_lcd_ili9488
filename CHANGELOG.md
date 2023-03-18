@@ -1,5 +1,10 @@
 # Change log for esp_lcd_ili9488
 
+## v1.0.8 - Adds support for portrait / landscape orientation.
+
+Thanks to a contribution from @jacobvc it is possible to configure the
+display as portrait (default) or landscape.
+
 ## v1.0.5 - Add 16-bit support for parallel IO interface support
 
 Parallel IO mode (Intel 8080 interface) should use 16-bit color mode instead

@@ -171,10 +171,18 @@ void initialize_display()
         .lcd_param_bits = DISPLAY_PARAMETER_BITS,
         .flags =
         {
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
             .dc_as_cmd_phase = 0,
             .dc_low_on_data = 0,
             .octal_mode = 0,
             .lsb_first = 0
+#else
+            .dc_low_on_data = 0,
+            .octal_mode = 0,
+            .sio_mode = 0,
+            .lsb_first = 0,
+            .cs_high_active = 0
+#endif
         }
     };
 
