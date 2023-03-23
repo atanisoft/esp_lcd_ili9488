@@ -255,11 +255,11 @@ static esp_err_t panel_ili9488_mirror(
     esp_lcd_panel_io_handle_t io = ili9488->io;
     if (mirror_x)
     {
-        ili9488->memory_access_control |= LCD_CMD_MX_BIT;
+        ili9488->memory_access_control &= ~LCD_CMD_MX_BIT;
     }
     else
     {
-        ili9488->memory_access_control &= ~LCD_CMD_MX_BIT;
+        ili9488->memory_access_control |= LCD_CMD_MX_BIT;
     }
     if (mirror_y)
     {
