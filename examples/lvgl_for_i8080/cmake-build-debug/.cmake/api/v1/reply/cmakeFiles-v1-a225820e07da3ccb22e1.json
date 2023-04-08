@@ -1,0 +1,1054 @@
+{
+	"inputs" : 
+	[
+		{
+			"path" : "CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/project.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/targets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/idf.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/build.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/third_party/GetGitRevisionDescription.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/git_submodules.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/FindGit.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/crosstool_version_check.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/kconfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/ExternalProject.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/component.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/utilities.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/targets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/ldgen.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/dfu.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/uf2.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/version.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/third_party/GetGitRevisionDescription.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/git-data/grabRef.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/refs/heads/release/v4.4"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/3.25.2/CMakeSystem.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/toolchain-esp32.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/utilities.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeSystemSpecificInitialize.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/3.25.2/CMakeCCompiler.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/3.25.2/CMakeCXXCompiler.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/CMakeFiles/3.25.2/CMakeASMCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeSystemSpecificInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeGenericSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeInitializeConfigs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Generic.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Generic.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCXXInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Generic.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeASMInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU-ASM.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/kconfig_new/config.env.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/config/sdkconfig.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/config/sdkconfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/bootloader/project_include.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/ExternalProject/mkdirs.cmake.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/bootloader-prefix/tmp/bootloader-mkdirs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/ExternalProject/RepositoryInfo.txt.in"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/ExternalProject/cfgcmd.txt.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esptool_py/project_include.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/partition_table/project_include.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_hw_support/project_include.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/xtensa/project_include.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_common/project_include.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/app_trace/project_include.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/spiffs/project_include.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/ulp/project_include.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/config/sdkconfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/cmake/project_description.json.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/asio/asio/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/asio/asio/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/bootloader/subproject/components/micro-ecc/micro-ecc/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/bootloader/subproject/components/micro-ecc/micro-ecc/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/bt/controller/lib_esp32/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/bt/controller/lib_esp32/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/bt/controller/lib_esp32c3_family/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/bt/controller/lib_esp32c3_family/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/bt/host/nimble/nimble/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/bt/host/nimble/nimble/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/cbor/tinycbor/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/cbor/tinycbor/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/cmock/CMock/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/cmock/CMock/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/coap/libcoap/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/coap/libcoap/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_phy/lib/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/esp_phy/lib/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_wifi/lib/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/esp_wifi/lib/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esptool_py/esptool/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/esptool_py/esptool/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/expat/expat/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/expat/expat/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/ieee802154/lib/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/ieee802154/lib/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/json/cJSON/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/json/cJSON/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/libsodium/libsodium/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/libsodium/libsodium/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/lwip/lwip/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/lwip/lwip/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/mbedtls/mbedtls/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/mbedtls/mbedtls/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/mqtt/esp-mqtt/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/mqtt/esp-mqtt/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/nghttp/nghttp2/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/nghttp/nghttp2/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/openthread/lib/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/openthread/lib/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/openthread/openthread/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/openthread/openthread/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/protobuf-c/protobuf-c/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/protobuf-c/protobuf-c/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/spiffs/spiffs/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/spiffs/spiffs/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/tinyusb/tinyusb/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/tinyusb/tinyusb/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/unity/unity/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/components/unity/unity/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/examples/build_system/cmake/import_lib/main/lib/tinyxml2/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/examples/build_system/cmake/import_lib/main/lib/tinyxml2/HEAD"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/examples/peripherals/secure_element/atecc608_ecdsa/components/esp-cryptoauthlib/.git"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/.git/modules/examples/peripherals/secure_element/atecc608_ecdsa/components/esp-cryptoauthlib/HEAD"
+		},
+		{
+			"path" : "sdkconfig"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/config/sdkconfig.h"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/config/sdkconfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/tools/kconfig_new/confgen.py"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/partition_table/partitions_singleapp_large.csv"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/flash_args.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/flash_args"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeASMInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU-ASM.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_ringbuf/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/efuse/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/efuse/esp32/sources.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_ipc/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/driver/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_pm/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/mbedtls/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/mbedtls/mbedtls/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/FindPython3.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/FindPython/Support.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/CheckCCompilerFlag.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/CheckCSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/Internal/CheckSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/Internal/CheckCompilerFlag.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/Internal/CheckFlagCommonConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/Internal/CheckSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/home/meibao/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.8109.174/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/mbedtls/mbedtls/include/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/mbedtls/mbedtls/3rdparty/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/mbedtls/mbedtls/library/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/bootloader/CMakeLists.txt"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/esp-idf/bootloader/bootloader-flash_args.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/bootloader-flash_args"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esptool_py/CMakeLists.txt"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/esp-idf/esptool_py/app-flash_args.in"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/app-flash_args"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/esp-idf/esptool_py/flasher_args.json.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/partition_table/CMakeLists.txt"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/esp-idf/partition_table/partition-table-flash_args.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/app_update/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/bootloader_support/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/spi_flash/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/nvs_flash/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/pthread/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_gdbstub/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/espcoredump/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_phy/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_system/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_system/ld/ld.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "cmake-build-debug/ldgen_libraries.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_system/port/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_system/port/soc/esp32/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_rom/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/hal/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/vfs/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_eth/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/tcpip_adapter/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_netif/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_event/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/wpa_supplicant/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_wifi/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/ieee802154/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/console/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/openthread/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/lwip/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/log/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/heap/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/soc/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/soc/esp32/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_hw_support/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_hw_support/port/esp32/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/xtensa/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp32/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_common/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_timer/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/freertos/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/newlib/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/newlib/port/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/cxx/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/app_trace/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/asio/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/bt/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/cbor/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/unity/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/cmock/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/coap/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/nghttp/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp-tls/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_adc_cal/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_hid/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/tcp_transport/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_http_client/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_http_server/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_https_ota/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_https_server/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_lcd/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/protobuf-c/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/protocomm/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/mdns/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_local_ctrl/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/sdmmc/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_serial_slave_link/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_websocket_client/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/expat/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/wear_levelling/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/fatfs/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/freemodbus/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/idf_test/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/jsmn/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/json/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/libsodium/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/mqtt/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/openssl/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/perfmon/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/spiffs/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/usb/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/tinyusb/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/ulp/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "/home/meibao/esp/esp-idf/components/wifi_provisioning/CMakeLists.txt"
+		},
+		{
+			"path" : "managed_components/atanisoft__esp_lcd_ili9488/CMakeLists.txt"
+		},
+		{
+			"path" : "managed_components/atanisoft__esp_lcd_ili9488/idf_component.yml"
+		},
+		{
+			"path" : "managed_components/lvgl__lvgl/CMakeLists.txt"
+		},
+		{
+			"path" : "managed_components/lvgl__lvgl/idf_component.yml"
+		},
+		{
+			"path" : "main/CMakeLists.txt"
+		},
+		{
+			"path" : "main/idf_component.yml"
+		}
+	],
+	"kind" : "cmakeFiles",
+	"paths" : 
+	{
+		"build" : "/home/meibao/project/iot/esp/s3/idf/lvgl/cmake-build-debug",
+		"source" : "/home/meibao/project/iot/esp/s3/idf/lvgl"
+	},
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}

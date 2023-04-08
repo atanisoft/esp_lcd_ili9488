@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "esp-idf/protobuf-c",
+		"source" : "/home/meibao/esp/esp-idf/components/protobuf-c"
+	}
+}

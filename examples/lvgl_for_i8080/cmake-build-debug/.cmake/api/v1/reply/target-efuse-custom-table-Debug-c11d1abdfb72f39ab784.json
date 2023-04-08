@@ -1,0 +1,35 @@
+{
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target"
+		],
+		"files" : 
+		[
+			"/home/meibao/esp/esp-idf/components/efuse/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 59,
+				"parent" : 0
+			}
+		]
+	},
+	"id" : "efuse-custom-table::@2da764c922f8b73e9c75",
+	"name" : "efuse-custom-table",
+	"paths" : 
+	{
+		"build" : "esp-idf/efuse",
+		"source" : "/home/meibao/esp/esp-idf/components/efuse"
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}

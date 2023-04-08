@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "esp-idf/tcp_transport",
+		"source" : "/home/meibao/esp/esp-idf/components/tcp_transport"
+	}
+}

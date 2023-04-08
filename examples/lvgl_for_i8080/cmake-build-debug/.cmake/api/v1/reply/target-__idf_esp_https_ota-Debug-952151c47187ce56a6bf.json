@@ -1,0 +1,516 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "esp-idf/esp_https_ota/libesp_https_ota.a"
+		}
+	],
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"idf_component_register",
+			"add_compile_options",
+			"add_c_compile_options",
+			"set_property",
+			"__component_set_dependencies",
+			"__component_set_all_dependencies",
+			"include_directories",
+			"target_include_directories",
+			"__component_add_include_dirs"
+		],
+		"files" : 
+		[
+			"/home/meibao/esp/esp-idf/tools/cmake/component.cmake",
+			"/home/meibao/esp/esp-idf/components/esp_https_ota/CMakeLists.txt",
+			"/home/meibao/esp/esp-idf/tools/cmake/utilities.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 1,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 478,
+				"parent" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 456,
+				"parent" : 1
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 457,
+				"parent" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 282,
+				"parent" : 4
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 467,
+				"parent" : 1
+			},
+			{
+				"command" : 6,
+				"file" : 0,
+				"line" : 512,
+				"parent" : 1
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 348,
+				"parent" : 7
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 333,
+				"parent" : 8
+			},
+			{
+				"command" : 7,
+				"file" : 0,
+				"line" : 455,
+				"parent" : 1
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 480,
+				"parent" : 1
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 309,
+				"parent" : 11
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 333,
+				"parent" : 8
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 351,
+				"parent" : 7
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 330,
+				"parent" : 14
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-mlongcalls -Wno-frame-address  -g -fdiagnostics-color=always"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-ffunction-sections"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fdata-sections"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wall"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Werror=all"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wno-error=unused-function"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wno-error=unused-variable"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wno-error=deprecated-declarations"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wextra"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wno-unused-parameter"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wno-sign-compare"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-ggdb"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Og"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fmacro-prefix-map=/home/meibao/project/iot/esp/s3/idf/lvgl=."
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fmacro-prefix-map=/home/meibao/esp/esp-idf=IDF"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fstrict-volatile-bitfields"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wno-error=unused-but-set-variable"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fno-jump-tables"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fno-tree-switch-conversion"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "-std=gnu99"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "-Wno-old-style-declaration"
+				},
+				{
+					"backtrace" : 6,
+					"fragment" : "-D_GNU_SOURCE"
+				},
+				{
+					"backtrace" : 6,
+					"fragment" : "-DIDF_VER=\\\"v4.4.4-368-ga9c36f277f\\\""
+				},
+				{
+					"backtrace" : 6,
+					"fragment" : "-DESP_PLATFORM"
+				},
+				{
+					"backtrace" : 6,
+					"fragment" : "-D_POSIX_READER_WRITER_LOCKS"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 9,
+					"define" : "HAVE_CONFIG_H"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 10,
+					"path" : "/home/meibao/project/iot/esp/s3/idf/lvgl/cmake-build-debug/config"
+				},
+				{
+					"backtrace" : 12,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_https_ota/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/newlib/platform_include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/freertos/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/freertos/include/esp_additions/freertos"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/freertos/port/xtensa/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/freertos/include/esp_additions"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_hw_support/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_hw_support/include/soc"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_hw_support/include/soc/esp32"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_hw_support/port/esp32/."
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_hw_support/port/esp32/private_include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/heap/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/log/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/lwip/include/apps"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/lwip/include/apps/sntp"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/lwip/lwip/src/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/lwip/port/esp32/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/lwip/port/esp32/include/arch"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/soc/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/soc/esp32/."
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/soc/esp32/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/hal/esp32/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/hal/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/hal/platform_port/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_rom/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_rom/include/esp32"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_rom/esp32"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_common/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_system/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_system/port/soc"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_system/port/public_compat"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp32/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/xtensa/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/xtensa/esp32/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/driver/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/driver/esp32/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_pm/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_ringbuf/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/efuse/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/efuse/esp32/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/vfs/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_wifi/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_event/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_netif/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_eth/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/tcpip_adapter/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_phy/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_phy/esp32/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_ipc/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/app_trace/include"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_timer/include"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/home/meibao/esp/esp-idf/components/esp_http_client/include"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/home/meibao/esp/esp-idf/components/nghttp/port/include"
+				},
+				{
+					"backtrace" : 9,
+					"path" : "/home/meibao/esp/esp-idf/components/nghttp/nghttp2/lib/includes"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "/home/meibao/esp/esp-idf/components/bootloader_support/include"
+				},
+				{
+					"backtrace" : 15,
+					"path" : "/home/meibao/esp/esp-idf/components/app_update/include"
+				},
+				{
+					"backtrace" : 15,
+					"path" : "/home/meibao/esp/esp-idf/components/spi_flash/include"
+				}
+			],
+			"language" : "C",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"id" : "__idf_sdmmc::@89ed5bca1750ffbc7db6"
+		}
+	],
+	"id" : "__idf_esp_https_ota::@55ee5ec07370a5473c2b",
+	"name" : "__idf_esp_https_ota",
+	"nameOnDisk" : "libesp_https_ota.a",
+	"paths" : 
+	{
+		"build" : "esp-idf/esp_https_ota",
+		"source" : "/home/meibao/esp/esp-idf/components/esp_https_ota"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"compileGroupIndex" : 0,
+			"path" : "/home/meibao/esp/esp-idf/components/esp_https_ota/src/esp_https_ota.c",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

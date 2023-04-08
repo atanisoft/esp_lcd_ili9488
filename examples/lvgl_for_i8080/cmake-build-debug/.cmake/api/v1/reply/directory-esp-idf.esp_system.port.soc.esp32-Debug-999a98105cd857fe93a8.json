@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "esp-idf/esp_system/port/soc/esp32",
+		"source" : "/home/meibao/esp/esp-idf/components/esp_system/port/soc/esp32"
+	}
+}

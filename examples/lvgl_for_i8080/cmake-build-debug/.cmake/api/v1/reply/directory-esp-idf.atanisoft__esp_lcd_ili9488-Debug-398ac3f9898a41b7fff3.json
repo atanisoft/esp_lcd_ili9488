@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "esp-idf/atanisoft__esp_lcd_ili9488",
+		"source" : "managed_components/atanisoft__esp_lcd_ili9488"
+	}
+}
