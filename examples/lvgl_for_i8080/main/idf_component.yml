@@ -1,4 +1,6 @@
 dependencies:
-  atanisoft/esp_lcd_ili9488: "^1.0.8"
-  idf: ">=4.4"
+  idf: ">=4.4.2"
   lvgl/lvgl: "==8.0.2"
+  esp_lcd_ili9488:
+    version: "~1.0.0"
+    override_path: "../../.."
