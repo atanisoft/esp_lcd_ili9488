@@ -79,6 +79,12 @@ static esp_err_t panel_ili9488_del(esp_lcd_panel_t *panel)
     {
         gpio_reset_pin(ili9488->reset_gpio_num);
     }
+
+    if (ili9488->color_buffer != NULL)
+    {
+        heap_caps_free(ili9488->color_buffer);
+    }
+
     ESP_LOGI(TAG, "del ili9488 panel @%p", ili9488);
     free(ili9488);
     return ESP_OK;
