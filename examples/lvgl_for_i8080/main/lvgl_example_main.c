@@ -23,21 +23,34 @@ static const char *TAG = "example";
 //////////////////// Please update the following configuration according to your LCD spec //////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #define EXAMPLE_LCD_PIXEL_CLOCK_HZ     (10 * 1000 * 1000)
+#define EXAMPLE_LCD_I80_BUS_WIDTH 8
+
+
 #define EXAMPLE_LCD_BK_LIGHT_ON_LEVEL  1
 #define EXAMPLE_LCD_BK_LIGHT_OFF_LEVEL !EXAMPLE_LCD_BK_LIGHT_ON_LEVEL
-#define EXAMPLE_PIN_NUM_DATA0          4
-#define EXAMPLE_PIN_NUM_DATA1          5
-#define EXAMPLE_PIN_NUM_DATA2          6
-#define EXAMPLE_PIN_NUM_DATA3          7
-#define EXAMPLE_PIN_NUM_DATA4          15
-#define EXAMPLE_PIN_NUM_DATA5          16
-#define EXAMPLE_PIN_NUM_DATA6          17
-#define EXAMPLE_PIN_NUM_DATA7          18
-#define EXAMPLE_PIN_NUM_PCLK           12
-#define EXAMPLE_PIN_NUM_CS             10
-#define EXAMPLE_PIN_NUM_DC             14
-#define EXAMPLE_PIN_NUM_RST            9
-#define EXAMPLE_PIN_NUM_BK_LIGHT       46
+#define EXAMPLE_PIN_NUM_DATA0          1
+#define EXAMPLE_PIN_NUM_DATA1          2
+#define EXAMPLE_PIN_NUM_DATA2          3
+#define EXAMPLE_PIN_NUM_DATA3          4
+#define EXAMPLE_PIN_NUM_DATA4          6
+#define EXAMPLE_PIN_NUM_DATA5          7
+#define EXAMPLE_PIN_NUM_DATA6          8
+#define EXAMPLE_PIN_NUM_DATA7          9
+#if EXAMPLE_LCD_I80_BUS_WIDTH > 8
+#define EXAMPLE_PIN_NUM_DATA8          10
+#define EXAMPLE_PIN_NUM_DATA9          11
+#define EXAMPLE_PIN_NUM_DATA10         12
+#define EXAMPLE_PIN_NUM_DATA11         13
+#define EXAMPLE_PIN_NUM_DATA12         14
+#define EXAMPLE_PIN_NUM_DATA13         15
+#define EXAMPLE_PIN_NUM_DATA14         16
+#define EXAMPLE_PIN_NUM_DATA15         21
+#endif
+#define EXAMPLE_PIN_NUM_PCLK           5
+#define EXAMPLE_PIN_NUM_CS             41
+#define EXAMPLE_PIN_NUM_DC             42
+#define EXAMPLE_PIN_NUM_RST            47
+#define EXAMPLE_PIN_NUM_BK_LIGHT       48
 
 // The pixel number in horizontal and vertical
 #define EXAMPLE_LCD_H_RES              320
@@ -90,6 +103,9 @@ void app_main(void)
     ESP_LOGI(TAG, "Initialize Intel 8080 bus");
     esp_lcd_i80_bus_handle_t i80_bus = NULL;
     esp_lcd_i80_bus_config_t bus_config = {
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 0, 0)
+        .clk_src = LCD_CLK_SRC_DEFAULT,
+#endif
         .dc_gpio_num = EXAMPLE_PIN_NUM_DC,
         .wr_gpio_num = EXAMPLE_PIN_NUM_PCLK,
         .data_gpio_nums = {
@@ -101,8 +117,18 @@ void app_main(void)
             EXAMPLE_PIN_NUM_DATA5,
             EXAMPLE_PIN_NUM_DATA6,
             EXAMPLE_PIN_NUM_DATA7,
+#if EXAMPLE_LCD_I80_BUS_WIDTH > 8
+            EXAMPLE_PIN_NUM_DATA8,
+            EXAMPLE_PIN_NUM_DATA9,
+            EXAMPLE_PIN_NUM_DATA10,
+            EXAMPLE_PIN_NUM_DATA11,
+            EXAMPLE_PIN_NUM_DATA12,
+            EXAMPLE_PIN_NUM_DATA13,
+            EXAMPLE_PIN_NUM_DATA14,
+            EXAMPLE_PIN_NUM_DATA15,
+#endif
         },
-        .bus_width = 8,
+        .bus_width = EXAMPLE_LCD_I80_BUS_WIDTH,
         .max_transfer_bytes = EXAMPLE_LCD_H_RES * 40 * sizeof(uint16_t)
     };
     ESP_ERROR_CHECK(esp_lcd_new_i80_bus(&bus_config, &i80_bus));
@@ -131,7 +157,7 @@ void app_main(void)
         .color_space = ESP_LCD_COLOR_SPACE_RGB,
         .bits_per_pixel = 16,
     };
-    ESP_ERROR_CHECK(esp_lcd_new_panel_ili9488(io_handle, &panel_config,EXAMPLE_LCD_H_RES * 20 * sizeof(lv_color_t),false, &panel_handle));
+    ESP_ERROR_CHECK(esp_lcd_new_panel_ili9488(io_handle, &panel_config,EXAMPLE_LCD_H_RES * 20 * sizeof(lv_color_t), &panel_handle));
 
     esp_lcd_panel_reset(panel_handle);
     esp_lcd_panel_init(panel_handle);
