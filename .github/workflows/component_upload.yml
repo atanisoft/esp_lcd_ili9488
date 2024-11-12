@@ -18,3 +18,4 @@ jobs:
           version: ${{ github.ref_name }}
           namespace: "atanisoft"
           api_token: ${{ secrets.IDF_COMPONENT_API_TOKEN }}
+          dry_run: ${{ github.repository_owner != 'atanisoft' }}
