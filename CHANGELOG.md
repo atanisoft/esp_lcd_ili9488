@@ -1,5 +1,15 @@
 # Change log for esp_lcd_ili9488
 
+## v1.0.10 - Bug fixes and 16-bit mode for i8080 example
+
+* Ensure the color_buffer is freed upon delete (@nebkat)
+* Enable 16-bit mode support for i8080 example and updates for idf v5.0 APIs
+
+## v1.0.9 - Bug fixes and new example
+
+* New i8080 example has been added (@meibao-real)
+* A bug with rotation has been fixed (@jacobvc)
+
 ## v1.0.8 - Adds support for portrait / landscape orientation.
 
 Thanks to a contribution from @jacobvc it is possible to configure the
