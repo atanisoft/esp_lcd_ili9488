@@ -35,6 +35,27 @@ static const unsigned int DISPLAY_REFRESH_HZ = 40000000;
 static const int DISPLAY_SPI_QUEUE_LEN = 10;
 static const int SPI_MAX_TRANSFER_SIZE = 32768;
 
+#if CONFIG_IDF_TARGET_ESP32S3
+static const gpio_num_t SPI_CLOCK = GPIO_NUM_11;
+static const gpio_num_t SPI_MOSI = GPIO_NUM_10;
+static const gpio_num_t SPI_MISO = GPIO_NUM_13;
+static const gpio_num_t TFT_CS = GPIO_NUM_3;
+static const gpio_num_t TFT_RESET = GPIO_NUM_46;
+static const gpio_num_t TFT_DC = GPIO_NUM_9;
+static const gpio_num_t TFT_BACKLIGHT = GPIO_NUM_12;
+#elif CONFIG_IDF_TARGET_ESP32
+static const gpio_num_t SPI_CLOCK = GPIO_NUM_14;
+static const gpio_num_t SPI_MOSI = GPIO_NUM_15;
+static const gpio_num_t SPI_MISO = GPIO_NUM_2;
+static const gpio_num_t TFT_CS = GPIO_NUM_16;
+static const gpio_num_t TFT_RESET = GPIO_NUM_NC;
+static const gpio_num_t TFT_DC = GPIO_NUM_17;
+static const gpio_num_t TFT_BACKLIGHT = GPIO_NUM_18;
+#else
+#error Unsure which GPIO to use for SPI/TFT, please update code accordingly.
+#endif
+static const lcd_rgb_element_order_t TFT_COLOR_MODE = COLOR_RGB_ELEMENT_ORDER_BGR;
+
 // Default to 25 lines of color data
 static const size_t LV_BUFFER_SIZE = DISPLAY_HORIZONTAL_PIXELS * 25;
 static const int LVGL_UPDATE_PERIOD_MS = 5;
@@ -88,7 +109,7 @@ static void display_brightness_init(void)
 {
     const ledc_channel_config_t LCD_backlight_channel =
     {
-        .gpio_num = (gpio_num_t)CONFIG_TFT_BACKLIGHT_PIN,
+        .gpio_num = TFT_BACKLIGHT,
         .speed_mode = BACKLIGHT_LEDC_MODE,
         .channel = BACKLIGHT_LEDC_CHANNEL,
         .intr_type = LEDC_INTR_DISABLE,
@@ -108,7 +129,7 @@ static void display_brightness_init(void)
         .freq_hz = BACKLIGHT_LEDC_FRQUENCY,
         .clk_cfg = LEDC_AUTO_CLK
     };
-    ESP_LOGI(TAG, "Initializing LEDC for backlight pin: %d", CONFIG_TFT_BACKLIGHT_PIN);
+    ESP_LOGI(TAG, "Initializing LEDC for backlight pin: %d", TFT_BACKLIGHT);
 
     ESP_ERROR_CHECK(ledc_timer_config(&LCD_backlight_timer));
     ESP_ERROR_CHECK(ledc_channel_config(&LCD_backlight_channel));
@@ -135,12 +156,12 @@ void display_brightness_set(int brightness_percentage)
 void initialize_spi()
 {
     ESP_LOGI(TAG, "Initializing SPI bus (MOSI:%d, MISO:%d, CLK:%d)",
-             CONFIG_SPI_MOSI, CONFIG_SPI_MISO, CONFIG_SPI_CLOCK);
+             SPI_MOSI, SPI_MISO, SPI_CLOCK);
     spi_bus_config_t bus =
     {
-        .mosi_io_num = CONFIG_SPI_MOSI,
-        .miso_io_num = CONFIG_SPI_MISO,
-        .sclk_io_num = CONFIG_SPI_CLOCK,
+        .mosi_io_num = SPI_MOSI,
+        .miso_io_num = SPI_MISO,
+        .sclk_io_num = SPI_CLOCK,
         .quadwp_io_num = GPIO_NUM_NC,
         .quadhd_io_num = GPIO_NUM_NC,
         .data4_io_num = GPIO_NUM_NC,
@@ -160,8 +181,8 @@ void initialize_display()
 {
     const esp_lcd_panel_io_spi_config_t io_config = 
     {
-        .cs_gpio_num = CONFIG_TFT_CS_PIN,
-        .dc_gpio_num = CONFIG_TFT_DC_PIN,
+        .cs_gpio_num = TFT_CS,
+        .dc_gpio_num = TFT_DC,
         .spi_mode = 0,
         .pclk_hz = DISPLAY_REFRESH_HZ,
         .trans_queue_depth = DISPLAY_SPI_QUEUE_LEN,
@@ -169,6 +190,10 @@ void initialize_display()
         .user_ctx = &lv_disp_drv,
         .lcd_cmd_bits = DISPLAY_COMMAND_BITS,
         .lcd_param_bits = DISPLAY_PARAMETER_BITS,
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5,4,0)
+        .cs_ena_pretrans = 0,
+        .cs_ena_posttrans = 0,
+#endif
         .flags =
         {
 #if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5, 0, 0)
@@ -188,8 +213,8 @@ void initialize_display()
 
     const esp_lcd_panel_dev_config_t lcd_config = 
     {
-        .reset_gpio_num = CONFIG_TFT_RESET_PIN,
-        .color_space = CONFIG_DISPLAY_COLOR_MODE,
+        .reset_gpio_num = TFT_RESET,
+        .color_space = TFT_COLOR_MODE,
         .bits_per_pixel = 18,
         .flags =
         {

@@ -1,5 +1,13 @@
 # Change log for esp_lcd_ili9488
 
+
+## v1.0.11 - Updates to LVGL examples
+
+* Removed Kconfig.projbuild from the LVGL example as it introduced complexity
+that wasn't needed.
+* Restrict LVGL example to LVGL 8.x as it will require rework for LVGL 9.x.
+* Updated LVGL example for ESP-IDF v5.4 
+
 ## v1.0.10 - Bug fixes and 16-bit mode for i8080 example
 
 * Ensure the color_buffer is freed upon delete (@nebkat)
