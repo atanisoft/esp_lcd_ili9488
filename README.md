@@ -72,9 +72,11 @@ having a number of SPI devices connected to same bus or due to wire length. If t
 the pclk_hz in the esp_lcd_panel_io_spi_config_t configuration to a lower value. You can try starting with 
 a small number, like 4mhz. If the artifacts disappear, try increasing this number until they appear again 
 to find a good value:
+```
  const esp_lcd_panel_io_spi_config_t io_config = 
     {
         ...
         .pclk_hz = 4 * 1000 * 1000,
         ...
     }
+```
