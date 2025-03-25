@@ -64,3 +64,17 @@ At this time testing is limited to ESP32 and ESP32-S3, other ESP32 variants shou
 This driver converts the color data from 16-bit to 18-bit as part of the `draw_bitmap` callback.
 Therefore it is required to set `CONFIG_LV_COLOR_DEPTH_16=y` in your sdkconfig. In the future other
 color depths may be supported.
+
+## Screen artifacts
+
+Some developers have noted artifacts on the screen when using in their projects. This seems to be related to
+having a number of SPI devices connected to same bus or due to wire length. If this happens, try changing 
+the pclk_hz in the esp_lcd_panel_io_spi_config_t configuration to a lower value. You can try starting with 
+a small number, like 4mhz. If the artifacts disappear, try increasing this number until they appear again 
+to find a good value:
+ const esp_lcd_panel_io_spi_config_t io_config = 
+    {
+        ...
+        .pclk_hz = 4 * 1000 * 1000,
+        ...
+    }
