@@ -32,7 +32,7 @@ static const int DISPLAY_VERTICAL_PIXELS = 480;
 static const int DISPLAY_COMMAND_BITS = 8;
 static const int DISPLAY_PARAMETER_BITS = 8;
 // Some developers have needed to reduce this value to avoid screen artifacts. It seems related to the # of SPI devices connected and/or wire lengths.
-// If you see artifiacts, try a low value, like 4 * 1000 * 1000, then increase until artifacts disappear.
+// If you see artifacts, try a low value, like 4 * 1000 * 1000, then increase until artifacts disappear.
 static const unsigned int DISPLAY_REFRESH_HZ = 40000000;
 static const int DISPLAY_SPI_QUEUE_LEN = 10;
 static const int SPI_MAX_TRANSFER_SIZE = 32768;
