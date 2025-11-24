@@ -2,4 +2,4 @@ dependencies:
   idf: '>=4.4.2'
 description: esp_lcd driver for ILI9488 displays
 url: https://github.com/atanisoft/esp_lcd_ili9488
-version: 1.0.11
+version: 1.1.0

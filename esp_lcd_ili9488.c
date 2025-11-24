@@ -367,6 +367,8 @@ esp_err_t esp_lcd_new_panel_ili9488(
     }
 
     ili9488->memory_access_control = LCD_CMD_MX_BIT | LCD_CMD_BGR_BIT;
+
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(6, 0, 0)
     switch (panel_dev_config->color_space)
     {
         case ESP_LCD_COLOR_SPACE_RGB:
@@ -380,6 +382,21 @@ esp_err_t esp_lcd_new_panel_ili9488(
             ESP_GOTO_ON_FALSE(false, ESP_ERR_INVALID_ARG, err, TAG,
                               "Unsupported color mode!");
     }
+#else
+    switch (panel_dev_config->rgb_ele_order)
+    {
+    case LCD_RGB_ELEMENT_ORDER_RGB:
+            ESP_LOGI(TAG, "Configuring for RGB color order");
+            ili9488->memory_access_control &= ~LCD_CMD_BGR_BIT;
+            break;
+    case LCD_RGB_ELEMENT_ORDER_BGR:
+            ESP_LOGI(TAG, "Configuring for BGR color order");
+            break;
+        default:
+            ESP_GOTO_ON_FALSE(false, ESP_ERR_INVALID_ARG, err, TAG,
+                              "Unsupported color mode!");
+    }
+#endif
 
     ili9488->io = io;
     ili9488->reset_gpio_num = panel_dev_config->reset_gpio_num;

@@ -154,7 +154,11 @@ void app_main(void)
     esp_lcd_panel_handle_t panel_handle = NULL;
     esp_lcd_panel_dev_config_t panel_config = {
         .reset_gpio_num = EXAMPLE_PIN_NUM_RST,
+#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(6, 0, 0)
         .color_space = ESP_LCD_COLOR_SPACE_RGB,
+#else
+        .rgb_ele_order = COLOR_SPACE_RGB,
+#endif
         .bits_per_pixel = 16,
     };
     ESP_ERROR_CHECK(esp_lcd_new_panel_ili9488(io_handle, &panel_config,EXAMPLE_LCD_H_RES * 20 * sizeof(lv_color_t), &panel_handle));

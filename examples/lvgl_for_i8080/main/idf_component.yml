@@ -2,5 +2,5 @@ dependencies:
   idf: ">=4.4.2"
   lvgl/lvgl: "~8.3.0"
   esp_lcd_ili9488:
-    version: "~1.0.0"
+    version: "~1.1.0"
     override_path: "../../.."
