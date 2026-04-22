@@ -1,8 +1,12 @@
 # Change log for esp_lcd_ili9488
 
-## v1.1.0 – Add ESP-IDF v6.0 Compatibility
+## v1.1.1 – Support for IPS displays
 
-* Added conditional inclusion of `esp_driver_ledc` in the main component **REQUIRES** list for ESP-IDF >= v6.0.
+* Added PR from @jbrilha for IPS display capability.
+
+## v1.1.0 – add esp-idf v6.0 compatibility
+
+* added conditional inclusion of `esp_driver_ledc` in the main component **requires** list for esp-idf >= v6.0.
 * Updated `esp_lcd_new_panel_ili9488` to handle the ESP-IDF v6.0 color-order API change (`color_space` -> `rgb_ele_order`).
 
 ## v1.0.11 - Updates to LVGL examples
