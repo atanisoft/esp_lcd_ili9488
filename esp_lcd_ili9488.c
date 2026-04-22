@@ -40,6 +40,7 @@ typedef struct
     uint8_t color_mode;
     size_t buffer_size;
     uint8_t *color_buffer;
+    bool ips;
 } ili9488_panel_t;
 
 enum ili9488_constants
@@ -51,10 +52,12 @@ enum ili9488_constants
     ILI9488_ENTRY_MODE_CTL = 0xB7,
     ILI9488_POWER_CTL_ONE = 0xC0,
     ILI9488_POWER_CTL_TWO = 0xC1,
-    ILI9488_POWER_CTL_THREE = 0xC5,
+    ILI9488_POWER_CTL_THREE = 0xC2,
+    ILI9488_VCOM_CTL = 0xC5,
     ILI9488_POSITIVE_GAMMA_CTL = 0xE0,
     ILI9488_NEGATIVE_GAMMA_CTL = 0xE1,
     ILI9488_ADJUST_CTL_THREE = 0xF7,
+    ILI9488_NORMAL_BLACK_CTL = 0x21,
 
     ILI9488_COLOR_MODE_16BIT = 0x55,
     ILI9488_COLOR_MODE_18BIT = 0x66,
@@ -122,7 +125,7 @@ static esp_err_t panel_ili9488_init(esp_lcd_panel_t *panel)
     ili9488_panel_t *ili9488 = __containerof(panel, ili9488_panel_t, base);
     esp_lcd_panel_io_handle_t io = ili9488->io;
 
-    lcd_init_cmd_t ili9488_init[] =
+    lcd_init_cmd_t ili9488_init_default[] =
     {
         { ILI9488_POSITIVE_GAMMA_CTL,
             { 0x00, 0x03, 0x09, 0x08, 0x16,
@@ -138,7 +141,7 @@ static esp_err_t panel_ili9488_init(esp_lcd_panel_t *panel)
         },
         { ILI9488_POWER_CTL_ONE, { 0x17, 0x15 }, 2 },
         { ILI9488_POWER_CTL_TWO, { 0x41 }, 1 },
-        { ILI9488_POWER_CTL_THREE, { 0x00, 0x12, 0x80 }, 3 },
+        { ILI9488_VCOM_CTL, { 0x00, 0x12, 0x80 }, 3 },
         { LCD_CMD_MADCTL, { ili9488->memory_access_control }, 1 },
         { LCD_CMD_COLMOD, { ili9488->color_mode }, 1 },
         { ILI9488_INTRFC_MODE_CTL, { ILI9488_INTERFACE_MODE_USE_SDO }, 1 },
@@ -150,21 +153,46 @@ static esp_err_t panel_ili9488_init(esp_lcd_panel_t *panel)
         { LCD_CMD_NOP, { 0 }, ILI9488_INIT_DONE_FLAG },
     };
 
+    lcd_init_cmd_t ili9488_init_ips[] =
+    {
+        { ILI9488_POWER_CTL_ONE, { 0x0F, 0x0F }, 2 },
+        { ILI9488_POWER_CTL_TWO, { 0x41 }, 1 },
+        { ILI9488_POWER_CTL_THREE, { 0x22 }, 1 },
+        { ILI9488_VCOM_CTL, { 0x00, 0x53, 0x80 }, 3 },
+        { LCD_CMD_MADCTL, { ili9488->memory_access_control }, 1 },
+        { LCD_CMD_COLMOD, { ili9488->color_mode }, 1 },
+        { ILI9488_FRAME_RATE_NORMAL_CTL, { ILI9488_FRAME_RATE_60HZ }, 1 },
+        { ILI9488_INVERSION_CTL, { 0x02 }, 1 },
+        { ILI9488_FUNCTION_CTL, { 0x02, 0x22, 0x3B }, 3 },
+        { ILI9488_ENTRY_MODE_CTL, { 0xC6 }, 1 },
+        { ILI9488_ADJUST_CTL_THREE, { 0xA9, 0x51, 0x2C, 0x82 }, 4 },
+        { ILI9488_POSITIVE_GAMMA_CTL, { 0x00, 0x08, 0x0C, 0x02, 0x0E, 0x04, 0x30, 0x45, 0x47, 0x04, 0x0C, 0x0A, 0x2E, 0x34, 0x0F }, 15 },
+        { ILI9488_NEGATIVE_GAMMA_CTL, { 0x00, 0x11, 0x0D, 0x01, 0x0F, 0x05, 0x39, 0x36, 0x51, 0x06, 0x0F, 0x0D, 0x33, 0x37, 0x0F }, 15 },
+        { ILI9488_NORMAL_BLACK_CTL, { 0 }, 0 },
+        { LCD_CMD_NOP, { 0 }, ILI9488_INIT_DONE_FLAG },
+    };
+
+    const lcd_init_cmd_t *init_cmds = ili9488->ips ? ili9488_init_ips : ili9488_init_default;
+
     ESP_LOGI(TAG, "Initializing ILI9488");
     int cmd = 0;
-    while ( ili9488_init[cmd].data_bytes != ILI9488_INIT_DONE_FLAG )
+    while ( init_cmds[cmd].data_bytes != ILI9488_INIT_DONE_FLAG )
     {
-        ESP_LOGD(TAG, "Sending CMD: %02x, len: %d", ili9488_init[cmd].cmd,
-                 ili9488_init[cmd].data_bytes & ILI9488_INIT_LENGTH_MASK);
+        ESP_LOGD(TAG, "Sending CMD: %02x, len: %d", init_cmds[cmd].cmd,
+                 init_cmds[cmd].data_bytes & ILI9488_INIT_LENGTH_MASK);
         esp_lcd_panel_io_tx_param(
-            io, ili9488_init[cmd].cmd, ili9488_init[cmd].data,
-            ili9488_init[cmd].data_bytes & ILI9488_INIT_LENGTH_MASK);
+            io, init_cmds[cmd].cmd, init_cmds[cmd].data,
+            init_cmds[cmd].data_bytes & ILI9488_INIT_LENGTH_MASK);
         cmd++;
     }
 
     // Take the display out of sleep mode.
     esp_lcd_panel_io_tx_param(io, LCD_CMD_SLPOUT, NULL, 0);
     vTaskDelay(pdMS_TO_TICKS(100));
+
+    // LovyanGFX exits idle mode before enabling the panel. Keep that sequence
+    // here to match the known-good IPS init path more closely.
+    esp_lcd_panel_io_tx_param(io, LCD_CMD_IDMOFF, NULL, 0);
 
     // Turn on the display.
     esp_lcd_panel_io_tx_param(io, LCD_CMD_DISPON, NULL, 0);
@@ -325,10 +353,11 @@ static esp_err_t panel_ili9488_disp_on_off(esp_lcd_panel_t *panel, bool on_off)
     return ESP_OK;
 }
 
-esp_err_t esp_lcd_new_panel_ili9488(
+static esp_err_t esp_lcd_new_panel_ili9488_internal(
     const esp_lcd_panel_io_handle_t io,
     const esp_lcd_panel_dev_config_t *panel_dev_config,
     const size_t buffer_size,
+    bool ips,
     esp_lcd_panel_handle_t *ret_panel)
 {
     esp_err_t ret = ESP_OK;
@@ -348,6 +377,8 @@ esp_err_t esp_lcd_new_panel_ili9488(
         ESP_GOTO_ON_ERROR(gpio_config(&cfg), err, TAG,
                           "configure GPIO for RESET line failed");
     }
+
+    ili9488->ips = ips;
 
     if (panel_dev_config->bits_per_pixel == 16)
     {
@@ -433,4 +464,22 @@ err:
         free(ili9488);
     }
     return ret;
+}
+
+esp_err_t esp_lcd_new_panel_ili9488(
+    const esp_lcd_panel_io_handle_t io,
+    const esp_lcd_panel_dev_config_t *panel_dev_config,
+    const size_t buffer_size,
+    esp_lcd_panel_handle_t *ret_panel)
+{
+    return esp_lcd_new_panel_ili9488_internal(io, panel_dev_config, buffer_size, false, ret_panel);
+}
+
+esp_err_t esp_lcd_new_panel_ili9488_ips(
+    const esp_lcd_panel_io_handle_t io,
+    const esp_lcd_panel_dev_config_t *panel_dev_config,
+    const size_t buffer_size,
+    esp_lcd_panel_handle_t *ret_panel)
+{
+    return esp_lcd_new_panel_ili9488_internal(io, panel_dev_config, buffer_size, true, ret_panel);
 }
